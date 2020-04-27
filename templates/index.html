@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+<body>
+ <div style="margin-left: 35%; margin-top: 5rem;" class="login">
+	<h1 style="margin-left: 11%;">Grammar checker</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<p><input type="text" name="sentence" placeholder="Enter the sentence" required="required" style="width:50%; height:27px" /></p>
+        <p><button id="check1" onclick="myFunction()" type="submit" class='btn btn-warning btn-block' style="width:7%;height: 26px;color: white!important;background-color: #0074d9;margin-left: 20%;">Check</button></p>
+        <div class="loader" id="check2" style="margin-left: 21%; display:none;" ></div>
+    </form>
+   <br>
+   <br>
+     <p style="font-size: 20px;"><strong>{{ prediction_bert }}</strong></p>
+     <p style="font-size: 20px;"><strong>{{ prediction_ulmfit }}</strong></p>
+ </div>
+
+
+</body>
+<script>
+
+function myFunction(){
+  console.log('hey');
+  var check1 = document.getElementById("check1");
+  var check2 = document.getElementById("check2");
+  if (check2.style.display === "none") {
+    check2.style.display = "block";
+    check1.style.display = "none";
+  }
+}
+</script>
+<style>
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-bottom: 16px solid blue;
+  width: 10px;
+  height: 10px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+</html>
+
